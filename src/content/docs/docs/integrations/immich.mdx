@@ -4,6 +4,7 @@ description: Use the Tinyauth OpenID Connect provider to authenticate users with
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import CreateOidcClientTool from "../../../../components/create-oidc-client-tool.astro";
 
 [Immich](https://immich.app/) is a self-hosted photo and video backup solution. By integrating Tinyauth as an OpenID Connect provider, you can centralize authentication and offer single sign-on (SSO) for your Immich users.
 
@@ -32,6 +33,9 @@ First, generate an OIDC client for Immich in Tinyauth:
     ./tinyauth oidc create immich
     ```
   </TabItem>
+  <TabItem label="Browser">
+    <CreateOidcClientTool />
+  </TabItem>
 </Tabs>
 
 From the output, keep the generated client ID and client secret.
@@ -43,7 +47,7 @@ TINYAUTH_OIDC_PRIVATEKEYPATH=/path/to/private/key.pem
 TINYAUTH_OIDC_PUBLICKEYPATH=/path/to/public/key.pem
 TINYAUTH_OIDC_CLIENTS_IMMICH_CLIENTID=client-id
 TINYAUTH_OIDC_CLIENTS_IMMICH_CLIENTSECRET=ta-client-secret
-TINYAUTH_OIDC_CLIENTS_IMMICH_TRUSTEDREDIRECTURIS=https://immich.example.com/auth/login,https://immich.example.com/user-settings,https://immich.example.com/api/oauth/mobile-redirect
+TINYAUTH_OIDC_CLIENTS_IMMICH_TRUSTEDREDIRECTURIS=https://immich.example.com/auth/login,https://immich.example.com/user-settings,https://immich.example.com/api/oauth/mobile-redirect,app.immich:///oauth-callback
 TINYAUTH_OIDC_CLIENTS_IMMICH_NAME=Immich
 ```
 
@@ -52,8 +56,6 @@ Immich uses multiple redirect URIs depending on your clients:
 - Web login: `https://immich.example.com/auth/login`
 - Account linking in web UI: `https://immich.example.com/user-settings`
 - Mobile app: `app.immich:///oauth-callback`
-
-If your OAuth provider cannot accept the `app.immich:///oauth-callback` custom scheme, Immich supports using `https://immich.example.com/api/oauth/mobile-redirect` as a mobile redirect override.
 :::
 
 Restart your Tinyauth instance after applying the configuration.
