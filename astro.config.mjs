@@ -133,7 +133,7 @@ export default defineConfig({
             {
               label: "Immich",
               slug: "docs/integrations/immich",
-            }
+            },
           ],
         },
         {

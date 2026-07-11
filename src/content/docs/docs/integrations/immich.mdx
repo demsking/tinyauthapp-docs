@@ -54,7 +54,7 @@ TINYAUTH_OIDC_CLIENTS_IMMICH_NAME=Immich
 :::note
 Immich uses multiple redirect URIs depending on your clients:
 - Web login: `https://immich.example.com/auth/login`
-- Account linking in web UI: `https://immich.example.com/user-settings`
+- Account linking in web UI: `https://immich.example.com/user-settings` - Mobile redirect endpoint: `https://immich.example.com/api/oauth/mobile-redirect` (useful if a custom scheme redirect is rejected)
 - Mobile app: `app.immich:///oauth-callback`
 :::
 
@@ -83,4 +83,4 @@ Immich performs OIDC discovery from the issuer URL. You can provide either:
 
 Save the settings, then open the Immich login page and use the OAuth button to test the flow.
 
-If authentication is successful, users are redirected to Tinyauth, sign in there, and are returned to Immich as authenticated users.
+If authentication is successful, users are redirected to Tinyauth to sign in, then are returned to Immich as authenticated users.
